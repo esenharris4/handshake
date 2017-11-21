@@ -5,4 +5,5 @@ Handshake is a node.JS application that allows you to send your electronic busin
 git clone 
 
 npm install 
+
 npm start
