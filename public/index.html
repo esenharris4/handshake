@@ -5,10 +5,17 @@
 	<body>
 		<header align="center">Handshake</header>
 		<br>
-		<form align="center" action="/createUser" method="post">
-		Email: <br>
-		<input type="text" name="email" id="email"><br>
-		<input type="submit" value="Submit"><br>
-		</form>
+		<div align="center">
+			<form action="/createUser" method="post">
+			<input type="text" name="email" id="email" placeholder="enter new email"><br>
+			<input type="text" name="password" id="password" placeholder="enter new password"><br>
+			<input type="submit" value="Create User"><br>
+			</form>
+			<form action="/login" method="post">
+			<input type="text" name="email" id="email" placeholder="enter email"><br>
+			<input type="text" name="password" id="password" placeholder="enter password"><br>
+			<input type="submit" value="Login"><br>
+			</form>
+		</div>
 	</body>
 </html>
