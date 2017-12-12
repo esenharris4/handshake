@@ -1,0 +1,17 @@
+extends layout
+
+block content
+    form(action='/' method = 'post')
+      center
+            | h3 check if in database
+            br
+            | email:
+            br
+            input(type='text', name='email')
+            br
+            |   password:
+            br
+            input(type='password', name='password')
+            |
+            br
+            button(type='submit', value='Submit') Submit
