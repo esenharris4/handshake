@@ -1,3 +1,4 @@
+var debug = require('debug')('passport')
 exports = module.exports = function (app, passport) {
   var LocalStrategy = require('passport-local').Strategy
 
@@ -7,7 +8,10 @@ exports = module.exports = function (app, passport) {
     passReqToCallback: true
   },
     function (req, username, password, done) {
-      app.db.models.User.findOne(username, function (err, user) {
+      var conditions = { email: username }
+      debug('hello')
+      console.log(app.db.models.User.find())
+      app.db.models.User.findOne(conditions, function (err, user) {
         if (err) {
           return done(err)
         }
