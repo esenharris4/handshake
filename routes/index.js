@@ -1,6 +1,6 @@
 var express = require('express')
 var router = express.Router()
-// var debug = require('debug')('index')
+var debug = require('debug')('index')
 var passport = require('passport')
 
 /* GET home page. */
@@ -19,25 +19,26 @@ router.post('/', function (req, res, next) {
   })(req, res, next)
 })
 
-// router.post('/', function (req, res, next) {
-//   debug(req.app.db)
-//   req.app.db.models.User.encryptPassword(req.body.password, function (err, hash) {
-//     if (err) {
-//       debug(err)
-//       return res.render('error', {message: err})
-//     }
-//     var fields = {
-//       email: req.body.email,
-//       password: hash
-//     }
-//     req.app.db.models.User.create(fields, function (err, user) {
-//       if (err) {
-//         debug(err)
-//         return res.render('error', {message: err})
-//       }
-//     })
-//   })
-// })
+router.post('/createUser', function (req, res, next) {
+  debug(req.app.db)
+  req.app.db.models.User.encryptPassword(req.body.password, function (err, hash) {
+    if (err) {
+      debug(err)
+      return res.render('error', {message: err})
+    }
+    var fields = {
+      email: req.body.email,
+      password: hash
+    }
+    req.app.db.models.User.create(fields, function (err, user) {
+      if (err) {
+        debug(err)
+        return res.render('error', {message: err})
+      }
+    })
+  })
+  return res.redirect('/')
+})
 //
 // router.post('/', function (req, res, next) {
 //   passport.authenticate

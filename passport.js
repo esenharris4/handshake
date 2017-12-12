@@ -10,7 +10,7 @@ exports = module.exports = function (app, passport) {
     function (req, username, password, done) {
       var conditions = { email: username }
       debug('hello')
-      console.log(app.db.models.User.find())
+      // console.log(app.db.models.User)
       app.db.models.User.findOne(conditions, function (err, user) {
         if (err) {
           return done(err)

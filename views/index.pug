@@ -15,3 +15,19 @@ block content
             |
             br
             button(type='submit', value='Submit') Submit
+
+
+    form(action='/createUser' method = 'post')
+              center
+                    | h3 add user
+                    br
+                    | email:
+                    br
+                    input(type='text', name='email')
+                    br
+                    |   password:
+                    br
+                    input(type='password', name='password')
+                    |
+                    br
+                    button(type='submit', value='Submit') Submit
