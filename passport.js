@@ -8,7 +8,7 @@ exports = module.exports = function (app, passport) {
     passReqToCallback: true
   },
     function (req, username, password, done) {
-      var conditions = { email: username }
+      var conditions = { _id: username }
       debug('hello')
       // console.log(app.db.models.User)
       app.db.models.User.findOne(conditions, function (err, user) {

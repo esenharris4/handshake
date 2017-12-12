@@ -11,6 +11,7 @@ router.get('/', function (req, res, next) {
 router.get('/home', function (req, res, next) {
   return res.render('home')
 })
+
 router.post('/', function (req, res, next) {
   passport.authenticate('local', function (err, user, info) {
     if (err) { return next(err) }
@@ -22,12 +23,13 @@ router.post('/', function (req, res, next) {
 router.post('/createUser', function (req, res, next) {
   debug(req.app.db)
   req.app.db.models.User.encryptPassword(req.body.password, function (err, hash) {
+  	console.log(req.body.password);
     if (err) {
       debug(err)
       return res.render('error', {message: err})
     }
     var fields = {
-      email: req.body.email,
+      _id: req.body.email,
       password: hash
     }
     req.app.db.models.User.create(fields, function (err, user) {
@@ -39,9 +41,5 @@ router.post('/createUser', function (req, res, next) {
   })
   return res.redirect('/')
 })
-//
-// router.post('/', function (req, res, next) {
-//   passport.authenticate
-// }
 
 module.exports = router

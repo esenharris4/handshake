@@ -2,7 +2,7 @@
 
 exports = module.exports = function (app, mongoose) {
   var User = new mongoose.Schema({
-    email: String,
+    _id: String,
     password: String
   })
 
