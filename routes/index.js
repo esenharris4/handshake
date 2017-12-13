@@ -2,21 +2,23 @@ var express = require('express')
 var router = express.Router()
 var debug = require('debug')('index')
 var passport = require('passport')
+var pug = require('pug')
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
   res.render('index', { title: 'Express' })
 })
 
-router.get('/home', function (req, res, next) {
-  return res.render('home')
-})
-
 router.post('/', function (req, res, next) {
   passport.authenticate('local', function (err, user, info) {
     if (err) { return next(err) }
     if (!user) { return res.redirect('error') }
-    return res.redirect('/home')
+    req.login(user, function(err) {
+        if (err) {
+            next(err);
+        }
+    })
+    return res.render('home', {email: req.user._id})
   })(req, res, next)
 })
 

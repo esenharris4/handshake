@@ -3,7 +3,7 @@ extends layout
 block content
     form(action='/' method = 'post')
       center
-            | h3 check if in database
+            | Check if in database
             br
             | email:
             br
@@ -15,19 +15,18 @@ block content
             |
             br
             button(type='submit', value='Submit') Submit
-
-
+            br
     form(action='/createUser' method = 'post')
-              center
-                    | h3 add user
-                    br
-                    | email:
-                    br
-                    input(type='text', name='email')
-                    br
-                    |   password:
-                    br
-                    input(type='password', name='password')
-                    |
-                    br
-                    button(type='submit', value='Submit') Submit
+      center
+            | Add user
+            br
+            | email:
+            br
+            input(type='text', name='email')
+            br
+            |   password:
+            br
+            input(type='password', name='password')
+            |
+            br
+            button(type='submit', value='Submit') Submit
