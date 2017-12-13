@@ -3,7 +3,8 @@
 exports = module.exports = function (app, mongoose) {
   var User = new mongoose.Schema({
     _id: String,
-    password: String
+    password: String,
+    friend_ids: [String]
   })
 
   User.methods.canPlayRoleOf = function (role) {

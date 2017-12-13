@@ -4,9 +4,8 @@ var debug = require('debug')('index')
 var passport = require('passport')
 var pug = require('pug')
 
-/* GET home page. */
 router.get('/', function (req, res, next) {
-  res.render('index', { title: 'Express' })
+  res.render('index', { title: 'Handshake' })
 })
 
 router.post('/', function (req, res, next) {
@@ -18,7 +17,7 @@ router.post('/', function (req, res, next) {
             next(err);
         }
     })
-    return res.render('home', {email: req.user._id})
+    return res.render('home', {email: req.user._id, friends: req.user.friend_ids}) // ADD IN FRIENDS LIST
   })(req, res, next)
 })
 
@@ -32,7 +31,8 @@ router.post('/createUser', function (req, res, next) {
     }
     var fields = {
       _id: req.body.email,
-      password: hash
+      password: hash,
+      friend_ids: []
     }
     req.app.db.models.User.create(fields, function (err, user) {
       if (err) {
@@ -42,6 +42,23 @@ router.post('/createUser', function (req, res, next) {
     })
   })
   return res.redirect('/')
+})
+
+// ADD AUTHENTICATION REQUIREMENT LATER
+// db.users.update({"_id":"exampleUser2@gmail.com"}, {$push: {"friend_ids":"surettej@bu.edu"}});
+router.post('/home/addFriend', function(req, res, next) {
+	req.app.db.models.User.findById(req.user._id, function (err, user) {
+	  if (err){ 
+	  	return handleError(err);
+	  }
+
+	  req.user.friend_ids.push(req.body.newFriendEmail.toString())
+	  user.set({ friend_ids: req.user.friend_ids });
+	  user.save(function (err, updatedUser) {
+	    if (err) return handleError(err);
+	  });
+	  res.render('home', {email: req.user._id, friends: req.user.friend_ids})
+	});
 })
 
 module.exports = router
