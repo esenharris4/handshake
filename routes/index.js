@@ -14,7 +14,7 @@ var transporter = nodemailer.createTransport({
 })
 
 router.get('/', function (req, res, next) {
-  res.render('index', { title: 'Handshake' })
+  res.render('index', { title: 'SQUARE MAIL' })
 })
 
 router.post('/', function (req, res, next) {
@@ -57,7 +57,7 @@ router.post('/createUser', function (req, res, next) {
 // ADD AUTHENTICATION REQUIREMENT LATER
 router.post('/home/addGroup', function(req, res, next) {
 	req.app.db.models.User.findById(req.user._id, function (err, user) {
-	  if (err){ 
+	  if (err){
 	  	return handleError(err);
 	  }
 
