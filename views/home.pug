@@ -1,6 +1,6 @@
 extends layout
 block content
-	.row(style='padding:2%; position: fixed; background:#E57480;z-index: 1;')
+	.row(style='padding:1%; position: fixed; background:#E57480;z-index: 1;')
 		.col-lg-3
 		.col-lg-6
 			h1(align='center',style="color:white") Square Mail Dashboard
@@ -9,17 +9,11 @@ block content
 		.col-lg-3
 					h6
 						a(style='color:white; float:right' ,href='/logout') Logout
-	.container
+	.container-fluid(style='padding:0%; background-color:grey')
+			.row(style='padding:4%')
 			.row(style='padding:5%')
-			.row.col-lg-12(style='padding:5%')
-				.col-lg-4
-				.col-lg-4
-					center
-						h2= email
-
-			.row(style='padding:2%')
 				.col-lg-2
-				.col-lg-3(style='padding:4%; border:3px; border-style:solid; border-color:black; border-radius:5%')
+				.col-lg-3(style='padding:4%; border:3px; border-style:solid; border-color:white; border-radius:5%; background-color:white')
 					form(action='/home/addGroup' method = 'post')
 							center
 								h3 Create New Group Square
@@ -27,11 +21,11 @@ block content
 								input(style='padding:2%; border:white', type='text', name='newGroup', placeholder='New Group Name')
 								br
 								br
-								button(style=';border: white',type='submit', value='Submit') SquareMyGroup
+								button(style='color:white;border:5px; border-style:solid; border-color:#E57480; border-radius:5%; background-color:#E57480;',type='submit', value='Submit') SquareMyGroup
 								br
 				.col-lg-2
 
-				.col-lg-3(style='padding:4%; border:3px; border-style:solid; border-color:black; border-radius:5%')
+				.col-lg-3(style='padding:4%; border:3px; border-style:solid; border-color: white; border-radius:5%; background-color:white')
 					form(action='/home/sendMail' method = 'post')
 						center
 							h3 Email A Group
@@ -42,17 +36,18 @@ block content
 							input(style='padding:2%;border: white',type='text', name='message', placeholder='Enter Message')
 							br
 							br
-							button(style='padding:2%;border: white',type='submit', value='Mail') Submit
+							button(style='color:white;border:5px; border-style:solid; border-color:#E57480; border-radius:5%; background-color:#E57480;',type='submit', value='Mail') Submit
 							br
-			.row(style='padding:2%')
-						h1 Squares:
-			.row
-				-var count = 0;
-				each val in groups
-						- var colors = ['E57480','84B3DA','7BD4F3','E8E288','7DCE82' ]
-						.col-lg-3(style='padding:3%')
-							- var getLink = "/groupInfo/" + val
+	.container
+				.row(style='padding:2%')
+							h1 Squares:
+				.row
+					-var count = 0;
+					each val in groups
+							- var colors = ['E57480','84B3DA','7BD4F3','E8E288','7DCE82' ]
+							.col-lg-3(style='padding:3%')
+								- var getLink = "/groupInfo/" + val
 
-							- var color = colors[count%colors.length]
-							a.btn(href='' + getLink, id=val , style='background-color:#'+color+';height:150px; width:150px; padding:4%; border:3px; border-style: solid; color: white; border-color:#' +color+ '; border-radius:5%') #{val}
-							- count = count + 1;
+								- var color = colors[count%colors.length]
+								a.btn(href='' + getLink, id=val , style='background-color:#'+color+';height:150px; width:150px; padding:4%; border:3px; border-style: solid; color: white; border-color:#' +color+ '; border-radius:5%') #{val}
+								- count = count + 1;
