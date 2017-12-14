@@ -34,10 +34,9 @@ block content
 				h3 Groups:
 				ul(style='list-style: none')
 					each val in groups
-						li
-							- var getLink = "/groupInfo/" + val
-							a(href='' + getLink, id=val) #{val}
+							li(style='height:150px; width:150px; padding:4%; border:3px; border-style: solid; border-color:#'+val+'; border-radius:5%')
+								- var getLink = "/groupInfo/" + val
+								a(href='' + getLink, id=val) #{val}
 				each val in ['D72638','3F88C5','F49D37', '140F2D','4C5454']
 						.col-lg-3(style='padding:3%')
-							.box(style='height:150px; width:150px; padding:4%; border:3px; border-style: solid; border-color:#'+val+'; border-radius:5%')
-								h6 Hoe
+							h6 Hoe
