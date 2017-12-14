@@ -1,21 +1,18 @@
 extends layout
 block content
 	center
-		h1 Welcome to Handshake
-		h2= email
+		h1 #{email}'s SquareMail Dashboard
 		br
 		form(action='/home/addGroup' method = 'post')
 			center
 				h3 Create New Group Square
 				input(type='text', name='newGroup', placeholder='New Group Name')
 				br
-				input(type='text', name='emails', placeholder='Paste Comma Separated Emails')
-				br
 				button(type='submit', value='Submit') SquareMyGroup
 				br
 		form(action='/home/sendMail' method = 'post')
 			center
-				h3 SendMail Test
+				h3 Email A Group
 				input(type='text', name='targetGroup', placeholder='Enter Group')
 				br
 				input(type='text', name='subject', placeholder='Enter Subject')
@@ -24,3 +21,9 @@ block content
 				br
 				button(type='submit', value='Mail') Submit
 				br
+		h3 Groups:
+		ul(style='list-style: none')
+			each val in groups
+				li
+					- var getLink = "/groupInfo/" + val
+					a(href='' + getLink, id=val) #{val}
