@@ -2,7 +2,7 @@ extends layout
 
 block content
 
-      .row-fluid(style='padding:2%;background:#140F2D')
+      .row-fluid(style='padding:2%;background:#E57480')
         h1(align="center" style='color: #fffff5') Square Mail
           img(alt='Brand', src='/images/whiteSquarelogo.png', style='height:5%; width:5%')
       .container
@@ -10,26 +10,30 @@ block content
         form(action='/' method = 'post')
               .row.col-lg-12
                   .col-1
-                  .col-lg-3(style='padding-top:5%; border:3px; border-style:solid; border-color:#3F88C5; border-radius:5%;')
+                  .col-lg-3(style='padding:3%; border:3px; border-style:solid; border-color:#7BD4F3; border-radius:5%;')
                       center
-                        h2(style='border: black') Login
+                        h2(style='color: black') Login
+                        br
                         input(align='center',style='border: white', type='text', name='email', placeholder='Enter Email')
                         br
                         input(style='border: white', type='password', name='password', placeholder='Enter Password')
                         br
-                        button(style='border-radius:5%; border: white; background-color: #3F88C5', type='submit', value='Submit') Submit
+                        br
+                        button(style='color:white;border-radius:5%; border: white; background-color: #7BD4F3', type='submit', value='Submit') Submit
                         br
                   .col-lg-5
-                  .col-3(style='padding:5%; border:3px; border-style:solid; border-color:#F49D37; border-radius:5%')
-                      p( style='color: black') Enter login info or create an account to connect instantly to millions!
+                  .col-3(style='padding:5%; border:3px; border-style:solid; border-color:#E8E288; border-radius:5%;background:#E8E288')
+                      p( style='color:white;') Enter login info or create an account to connect instantly to millions!
         form(action='/createUser' method = 'post')
               .row.col-lg-12
                   .col-lg-5
-                  .col-lg-3(style='padding:4%; border:3px; border-style:solid; border-color:#D72638; border-radius:5%')
+                  .col-lg-3(style='padding:3%; border:3px; border-style:solid; border-color:#7DCE82; border-radius:5%')
                     center
                       h2 Create Account
+                      br
                       input(style='border: white', type='text', name='email', placeholder='Enter New Email')
                       br
                       input(style='border: white', type='password', name='password', placeholder='Enter New Password')
                       br
-                      button(style='border-radius:5%; background:#D72638; border: white', type='submit', value='Submit') Submit
+                      br
+                      button(style='color:white;border-radius:5%; background:#7DCE82; border: white', type='submit', value='Submit') Submit
