@@ -6,6 +6,7 @@ block content
 		p #{emailList}
 		-var addPath = '/add/' + groupName
 		-var deletePath = '/delete/' + groupName
+		-var nukePath = '/nukeGroup/' + groupName
 		form(action=''+addPath, method = 'post')
 			center
 				h3 Add Member
@@ -19,4 +20,9 @@ block content
 				input(type='text', name='email', placeholder='Delete Email')
 				br
 				button(type='submit', value='Submit') Remove User
+				br
+		form(action=''+nukePath, method = 'post')
+			center
+				h3 Nuke This Group
+				button(type='submit', value='Submit') Remove Group Forever
 				br

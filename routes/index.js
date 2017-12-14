@@ -175,6 +175,37 @@ router.post('/delete/:val', function(req, res, next) {
 	});
 })
 
+router.post('/nukeGroup/:val', function(req, res, next) {
+	req.app.db.models.User.findById(req.user._id, function (err, user) {
+	  if (err){
+	  	return handleError(err);
+	  }
+
+	  var emailListIndex = req.user.groups.indexOf(req.params.val)
+
+	  var emailArr = req.user.emailList.filter(function(elem, index, array) {
+		        return array.indexOf(elem) !== emailListIndex;
+		    }
+		);
+
+	  var groupsArr = req.user.groups.filter(function(elem, index, array) {
+		        return array.indexOf(elem) !== emailListIndex;
+		    }
+		);
+
+	  console.log(groupsArr + '\n')
+	  console.log(emailArr +'\n\n')
+
+	  user.set({ emailList: emailArr })
+	  user.set({ groups: groupsArr })
+	  user.save(function (err, updatedUser) {
+	    if (err) return handleError(err);
+	  })
+
+	  res.render('home', {email: req.user._id, groups: groupsArr})
+	});
+})
+
 router.get('/logout', function(req, res, next) {
 	req.logout()
 	res.render('index', { title: 'SquareMail' })
