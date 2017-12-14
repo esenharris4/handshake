@@ -8,7 +8,7 @@ exports = module.exports = function (app, passport) {
     passReqToCallback: true
   },
     function (req, username, password, done) {
-      var conditions = { email: username }
+      var conditions = { _id: username }
       debug('hello')
       // console.log(app.db.models.User)
       app.db.models.User.findOne(conditions, function (err, user) {
@@ -33,4 +33,17 @@ exports = module.exports = function (app, passport) {
       })
     })
   )
+
+  passport.serializeUser(function(user, done) {
+    console.log('serializing ' + user._id)
+    done(null,user._id)
+  })
+
+  passport.deserializeUser(function(id, done) {
+    app.db.models.User.findById(id, function(err, user) {
+      console.log('deserializing ' + id)
+      done(err, user)
+    })
+  })
+
 }
