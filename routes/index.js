@@ -2,6 +2,7 @@ var express = require('express')
 var router = express.Router()
 var debug = require('debug')('index')
 var passport = require('passport')
+var flash = require('express-flash')
 var pug = require('pug')
 var nodemailer = require('nodemailer')
 
@@ -14,7 +15,7 @@ var transporter = nodemailer.createTransport({
 })
 
 router.get('/', function (req, res, next) {
-  res.render('index', { title: 'SquareMail' })
+ 	res.render('index', { title: 'SquareMail' })
 })
 
 router.post('/', function (req, res, next) {
@@ -31,17 +32,18 @@ router.post('/', function (req, res, next) {
 })
 
 router.get('/home', function(req, res, next) {
+	req.flash('info', 'Welcome');
 	res.render('home', {email: req.user._id, groups: req.user.groups})
 })
 
 router.post('/createUser', function (req, res, next) {
   debug(req.app.db)
   req.app.db.models.User.encryptPassword(req.body.password, function (err, hash) {
-  	console.log(req.body.password);
     if (err) {
       debug(err)
       return res.render('error', {message: err})
     }
+
     var fields = {
       _id: req.body.email,
       password: hash,
@@ -89,7 +91,9 @@ router.post('/home/sendMail', function(req, res, next) {
 	};
 
 	transporter.sendMail(mailOptions, function (err, info) {
-		if(err) console.log(err)
+		if(err) {
+			console.log(err)
+		}
 		else console.log(info);
 	});
 	res.render('home', {email: req.user._id, groups: req.user.groups})
@@ -145,6 +149,11 @@ router.post('/delete/:val', function(req, res, next) {
 	  });
 	  res.render('groupInfo', {groupName: req.params.val, emailList: req.user.emailList, userName: req.user._id})
 	});
+})
+
+router.get('/logout', function(req, res, next) {
+	req.logout()
+	res.render('index', { title: 'SquareMail' })
 })
 
 module.exports = router
