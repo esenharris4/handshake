@@ -4,14 +4,23 @@ block content
 		h1 Welcome to Handshake
 		h2= email
 		br
-		h3 Friends:
-		ul(list-style-type='none')
-			each val in friends
-				li= val
-		form(action='/home/addFriend' method = 'post')
+		form(action='/home/addGroup' method = 'post')
 			center
-				h3 Add Friend
-				input(type='text', name='newFriendEmail', placeholder='Enter Email')
+				h3 Create New Group Square
+				input(type='text', name='newGroup', placeholder='New Group Name')
 				br
-				button(type='submit', value='Submit') Submit
+				input(type='text', name='emails', placeholder='Paste Comma Separated Emails')
+				br
+				button(type='submit', value='Submit') SquareMyGroup
+				br
+		form(action='/home/sendMail' method = 'post')
+			center
+				h3 SendMail Test
+				input(type='text', name='targetGroup', placeholder='Enter Group')
+				br
+				input(type='text', name='subject', placeholder='Enter Subject')
+				br
+				input(type='text', name='message', placeholder='Enter Message')
+				br
+				button(type='submit', value='Mail') Submit
 				br
