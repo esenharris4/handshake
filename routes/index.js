@@ -105,7 +105,12 @@ router.get('/groupInfo/:val', function (req, res, next) {
 	console.log(emailList)
 	console.log(emailListIndex)
 
-	res.render('groupInfo', {groupName: req.params.val, emailList: emailList, userName: req.user._id})
+	if(req.user.emailList.length == 0){
+	  res.render('groupInfo', {groupName: req.params.val, emailList: ['Your group looks empty!'], userName: req.user._id})
+	}
+    else {
+	  res.render('groupInfo', {groupName: req.params.val, emailList: req.user.emailList[emailListIndex], userName: req.user._id})
+	}
 })
 
 router.post('/add/:val', function(req, res, next) {
@@ -115,13 +120,23 @@ router.post('/add/:val', function(req, res, next) {
 	  }
 
 	  var emailListIndex = req.user.groups.indexOf(req.params.val)
+	  if(req.body.newEmail == ""){
+	  	console.log('empty string')
+		res.render('groupInfo', {groupName: req.params.val, emailList: req.user.emailList[emailListIndex], userName: req.user._id})
+		return
+	  }
 	  var emailList = req.user.emailList[emailListIndex].push(req.body.newEmail)
 
 	  user.set({ emailList: req.user.emailList })
 	  user.save(function (err, updatedUser) {
 	    if (err) return handleError(err);
-	  });
-	  res.render('groupInfo', {groupName: req.params.val, emailList: req.user.emailList[emailListIndex], userName: req.user._id})
+	  })
+	  if(req.user.emailList.length == 0){
+	  	res.render('groupInfo', {groupName: req.params.val, emailList: ['Your group looks empty!'], userName: req.user._id})
+	  }
+	  else {
+	  	res.render('groupInfo', {groupName: req.params.val, emailList: req.user.emailList[emailListIndex], userName: req.user._id})
+	  }
 	});
 })
 
@@ -132,6 +147,10 @@ router.post('/delete/:val', function(req, res, next) {
 	  }
 
 	  var emailListIndex = req.user.groups.indexOf(req.params.val)
+	  if(req.body.email == ""){
+	  	res.render('groupInfo', {groupName: req.params.val, emailList: req.user.emailList[emailListIndex], userName: req.user._id})
+	  	return
+	  }
 	  var emailList = req.user.emailList[emailListIndex]
 	  var newEmailList = []
 
@@ -140,14 +159,19 @@ router.post('/delete/:val', function(req, res, next) {
 	  		newEmailList.push(emailList[i])
 	  	}
 	  }
-	  console.log(newEmailList)
+	  console.log(newEmailList + ' ' + emailListIndex)
 	  req.user.emailList[emailListIndex] = newEmailList
 
 	  user.set({ emailList: req.user.emailList })
 	  user.save(function (err, updatedUser) {
 	    if (err) return handleError(err);
-	  });
-	  res.render('groupInfo', {groupName: req.params.val, emailList: req.user.emailList, userName: req.user._id})
+	  })
+	  if(req.user.emailList.length == 0){
+	  	res.render('groupInfo', {groupName: req.params.val, emailList: ['Your group looks empty!'], userName: req.user._id})
+	  }
+	  else {
+	  	res.render('groupInfo', {groupName: req.params.val, emailList: req.user.emailList[emailListIndex], userName: req.user._id})
+	  }
 	});
 })
 
