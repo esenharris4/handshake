@@ -2,36 +2,41 @@ extends layout
 block content
 	.container
 		center
-			h1 Square Mail
+			h1 Square Mail Dashboard
 			h2= email
+			a(href='/logout') Logout
 			.row
 				.col-lg-2
 				.col-lg-3
 					form(action='/home/addGroup' method = 'post')
-						center
-							h3 Create New Group Square
-							input(style='border: invisible', type='text', name='newGroup', placeholder='New Group Name')
-							br
-							input(style='border: invisible', type='text', name='emails', placeholder='Paste Comma Separated Emails')
-							br
-							button(type='submit', value='Submit') SquareMyGroup
-							br
+							center
+								h3 Create New Group Square
+								input(type='text', name='newGroup', placeholder='New Group Name')
+								br
+								button(type='submit', value='Submit') SquareMyGroup
+								br
 				.col-lg-2
 				.col-lg-3
 					form(action='/home/sendMail' method = 'post')
 						center
-							h3 SendMail Test
-							input(style='border: invisible', type='text', name='targetGroup', placeholder='Enter Group')
+							h3 Email A Group
+							input(type='text', name='targetGroup', placeholder='Enter Group')
 							br
-							input(style='border: invisible', type='text', name='subject', placeholder='Enter Subject')
+							input(type='text', name='subject', placeholder='Enter Subject')
 							br
-							input( style='border: invisible', type='text', name='message', placeholder='Enter Message')
+							input(type='text', name='message', placeholder='Enter Message')
 							br
 							button(type='submit', value='Mail') Submit
 							br
 			.row
 						h1 Squares
 			.row
+				h3 Groups:
+				ul(style='list-style: none')
+					each val in groups
+						li
+							- var getLink = "/groupInfo/" + val
+							a(href='' + getLink, id=val) #{val}
 				each val in ['D72638','3F88C5','F49D37', '140F2D','4C5454']
 						.col-lg-3(style='padding:3%')
 							.box(style='height:150px; width:150px; padding:4%; border:3px; border-style: solid; border-color:#'+val+'; border-radius:5%')

@@ -1,0 +1,22 @@
+extends layout
+block content
+	a(href='/home') Back
+	center
+		h1= groupName
+		p #{emailList}
+		-var addPath = '/add/' + groupName
+		-var deletePath = '/delete/' + groupName
+		form(action=''+addPath, method = 'post')
+			center
+				h3 Add Member
+				input(type='text', name='newEmail', placeholder='Add Email')
+				br
+				button(type='submit', value='Submit') Add Newbie
+				br
+		form(action=''+deletePath, method = 'post')
+			center
+				h3 Delete Member
+				input(type='text', name='email', placeholder='Delete Email')
+				br
+				button(type='submit', value='Submit') Remove User
+				br
