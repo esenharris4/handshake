@@ -1,42 +1,56 @@
 extends layout
 block content
 	.container
-		center
-			h1 Square Mail Dashboard
-			h2= email
-			a(href='/logout') Logout
-			.row
-				.col-lg-2
+			.row.col-lg-12
 				.col-lg-3
+				.col-lg-6
+					h1 Square Mail Dashboard
+						img(alt='Brand', src='/images/squaremailblack.png', style= 'height:10%;width:10%')
+				.col-lg-3
+					h6
+						a(style='float:right' ,href='/logout') Logout
+			.row.col-lg-12(style='padding:5%')
+				.col-lg-4
+				.col-lg-4
+					center
+						h2= email
+
+			.row(style='padding:2%')
+				.col-lg-2
+				.col-lg-3(style='padding:4%; border:3px; border-style:solid; border-color:black; border-radius:5%')
 					form(action='/home/addGroup' method = 'post')
 							center
 								h3 Create New Group Square
-								input(type='text', name='newGroup', placeholder='New Group Name')
 								br
-								button(type='submit', value='Submit') SquareMyGroup
+								input(style='padding:2%; border:white', type='text', name='newGroup', placeholder='New Group Name')
+								br
+								br
+								button(style=';border: white',type='submit', value='Submit') SquareMyGroup
 								br
 				.col-lg-2
-				.col-lg-3
+
+				.col-lg-3(style='padding:4%; border:3px; border-style:solid; border-color:black; border-radius:5%')
 					form(action='/home/sendMail' method = 'post')
 						center
 							h3 Email A Group
-							input(type='text', name='targetGroup', placeholder='Enter Group')
+							input(style='padding:2%;border: white',type='text', name='targetGroup', placeholder='Enter Group')
 							br
-							input(type='text', name='subject', placeholder='Enter Subject')
+							input(style='padding:2%;border: white',type='text', name='subject', placeholder='Enter Subject')
 							br
-							input(type='text', name='message', placeholder='Enter Message')
+							input(style='padding:2%;border: white',type='text', name='message', placeholder='Enter Message')
 							br
-							button(type='submit', value='Mail') Submit
 							br
+							button(style='padding:2%;border: white',type='submit', value='Mail') Submit
+							br
+			.row(style='padding:2%')
+						h1 Squares:
 			.row
-						h1 Squares
-			.row
-				h3 Groups:
-				ul(style='list-style: none')
-					each val in groups
-							li(style='height:150px; width:150px; padding:4%; border:3px; border-style: solid; border-color:#'+val+'; border-radius:5%')
-								- var getLink = "/groupInfo/" + val
-								a(href='' + getLink, id=val) #{val}
-				each val in ['D72638','3F88C5','F49D37', '140F2D','4C5454']
+				-var count = 0;
+				each val in groups
+						- var colors = ['E57480','84B3DA','7BD4F3','E8E288','7DCE82' ]
 						.col-lg-3(style='padding:3%')
-							h6 Hoe
+							- var getLink = "/groupInfo/" + val
+
+							- var color = colors[count%colors.length]
+							a.btn(href='' + getLink, id=val , style='background-color:#'+color+';height:150px; width:150px; padding:4%; border:3px; border-style: solid; color: white; border-color:#' +color+ '; border-radius:5%') #{val}
+							- count = count + 1;
