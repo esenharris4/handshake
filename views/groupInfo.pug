@@ -1,28 +1,51 @@
 extends layout
 block content
-	a(href='/home') Back
-	center
-		h1= groupName
-		p #{emailList}
-		-var addPath = '/add/' + groupName
-		-var deletePath = '/delete/' + groupName
-		-var nukePath = '/nukeGroup/' + groupName
-		form(action=''+addPath, method = 'post')
-			center
-				h3 Add Member
-				input(type='text', name='newEmail', placeholder='Add Email')
-				br
-				button(type='submit', value='Submit') Add Newbie
-				br
-		form(action=''+deletePath, method = 'post')
-			center
-				h3 Delete Member
-				input(type='text', name='email', placeholder='Delete Email')
-				br
-				button(type='submit', value='Submit') Remove User
-				br
-		form(action=''+nukePath, method = 'post')
-			center
-				h3 Nuke This Group
-				button(type='submit', value='Submit') Remove Group Forever
-				br
+	.row(style='padding:1%; background:#E57480;z-index: 1;')
+		.col-lg-3
+			h6
+				a(style='float: left; color: white; padding:4%;',href='/home') Back
+		.col-lg-6
+			h1(align='center',style="color:white") Square Mail Dashboard
+				img(alt='Brand', src='/images/whiteSquarelogo.png', style= 'height:10%;width:10%')
+
+		.col-lg-3
+					h6
+						a(style='color:white; float:right' ,href='/logout') Logout
+	.container(style='')
+		.row(style='padding:4%')
+		.row
+			.col-lg-2
+			.col-lg-3(style='background-color:#7BD4F3; padding:4%; border:3px; border-style:solid; border-color:white; border-radius:5%')
+					-var addPath = '/add/' + groupName
+					-var deletePath = '/delete/' + groupName
+          -var nukePath = '/nukeGroup/' + groupName
+					form(action=''+addPath, method = 'post')
+						center
+							h3(style='padding-bottom:2%; color:white') Add Member
+							input(style='padding:2%; border:2px; border-style:solid; border-color:white; border-radius:5%',type='text', name='newEmail', placeholder='Add Email')
+							br
+							button(style='background:#7DCE82; padding:2%; color: white;border:1px; border-style:solid; border-color:#7DCE82; border-radius:5%',type='submit', value='Submit') Add Newbie
+							br
+					form(action=''+deletePath, method = 'post')
+						center
+							br
+							h3(style='padding-bottom:2%; color:white') Delete Member
+							input(style='padding:2%; border:2px; border-style:solid; border-color:white; border-radius:5%', name='email', placeholder='Delete Email')
+							br(style='padding:1%')
+							button(style='background-color:#E57480; color:white; padding:2%; border:1px; border-style:solid; border-color:#E57480; border-radius:5%',type='submit', value='Submit') Remove User
+							br
+          form(action=''+nukePath, method = 'post')
+            center
+              h3 Nuke This Group
+              button(type='submit', value='Submit') Remove Group Forever
+              br
+
+			.col-lg-2
+			.col-lg-3(style='background-color:#84B3DA; padding:3%; border:3px; border-style:solid; border-color:white; border-radius:5%;')
+					center
+						h1(style='color:white')= groupName
+						- var list = emailList
+						.box(style='padding-top:1%; overflow-y: scroll; height:200px; float:left; background-color:white; border:2px; border-style:solid; border-color:white; border-radius:5%')
+							ul(style='list-style-type: none;' align='left' )
+								each val in list
+									li= val
