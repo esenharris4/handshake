@@ -1,6 +1,6 @@
 extends layout
 block content
-	.row(style='padding:1%; background:#E57480;z-index: 1;')
+	.row(style='padding:1%; background:#353DA5;z-index: 1;')
 		.col-lg-3
 			h6
 				a(style='float: left; color: white; padding:4%;',href='/home') Back
@@ -16,7 +16,7 @@ block content
 	if emailList.length == 0
 		.row
 					.col-lg-4
-					.col-lg-4(style='background-color:grey; padding:4%; border:3px; border-style:solid; border-color:grey; border-radius:5%')
+					.col-lg-4(style='background-color:#353DA5; padding:4%; border:3px; border-style:solid; border-color:#353DA5; border-radius:5%')
 						-var addPath = '/add/' + groupName
 						-var nukePath = '/nukeGroup/' + groupName
 						form(action=''+addPath, method = 'post')
@@ -36,7 +36,7 @@ block content
 	else
 		.row
 			.col-lg-2
-			.col-lg-3(style='background-color:grey; padding:4%; border:3px; border-style:solid; border-color:grey; border-radius:5%')
+			.col-lg-3(style='background-color:#353DA5; padding:4%; border:3px; border-style:solid; border-color:#353DA5; border-radius:5%')
 					-var addPath = '/add/' + groupName
 					-var deletePath = '/delete/' + groupName
 					-var nukePath = '/nukeGroup/' + groupName
@@ -57,7 +57,7 @@ block content
 							br
 
 			.col-lg-2
-			.col-lg-3(style='background-color:grey; padding:3%; border:3px; border-style:solid; border-color:white; border-radius:5%;')
+			.col-lg-3(style='background-color:#353DA5; padding:3%; border:3px; border-style:solid; border-color:#353DA5; border-radius:5%;')
 					center
 						h1(style='color:white')= groupName
 						- var list = emailList
