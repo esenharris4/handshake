@@ -13,9 +13,30 @@ block content
 						a(style='color:white; float:right' ,href='/logout') Logout
 	.container(style='')
 		.row(style='padding:4%')
+	if emailList.length == 0
+		.row
+					.col-lg-4
+					.col-lg-4(style='background-color:grey; padding:4%; border:3px; border-style:solid; border-color:grey; border-radius:5%')
+						-var addPath = '/add/' + groupName
+						-var nukePath = '/nukeGroup/' + groupName
+						form(action=''+addPath, method = 'post')
+							center
+								h3(style='padding-bottom:2%; color:white') Add Member
+								input(style='padding:2%; border:2px; border-style:solid; border-color:white; border-radius:5%',type='text', name='newEmail', placeholder='Add Email')
+								br
+								button(style='background:#7DCE82; padding:2%; color: white;border:1px; border-style:solid; border-color:#7DCE82; border-radius:5%',type='submit', value='Submit') Add Newbie
+								br
+		.row(style='padding-top:5%')
+									.col-lg-12
+											form(action=''+nukePath, method = 'post')
+												center
+													h3 Nuke This Group
+													button(style='color:white; background-color:red; border:2px; border-style:solid; border-color:white; border-radius:5%',type='submit', value='Submit') Remove Group Forever
+													br
+	else
 		.row
 			.col-lg-2
-			.col-lg-3(style='background-color:#7BD4F3; padding:4%; border:3px; border-style:solid; border-color:white; border-radius:5%')
+			.col-lg-3(style='background-color:grey; padding:4%; border:3px; border-style:solid; border-color:grey; border-radius:5%')
 					-var addPath = '/add/' + groupName
 					-var deletePath = '/delete/' + groupName
 					-var nukePath = '/nukeGroup/' + groupName
@@ -34,18 +55,21 @@ block content
 							br(style='padding:1%')
 							button(style='background-color:#E57480; color:white; padding:2%; border:1px; border-style:solid; border-color:#E57480; border-radius:5%',type='submit', value='Submit') Remove User
 							br
-					form(action=''+nukePath, method = 'post')
-						center
-							h3 Nuke This Group
-							button(type='submit', value='Submit') Remove Group Forever
-							br
 
 			.col-lg-2
-			.col-lg-3(style='background-color:#84B3DA; padding:3%; border:3px; border-style:solid; border-color:white; border-radius:5%;')
+			.col-lg-3(style='background-color:grey; padding:3%; border:3px; border-style:solid; border-color:white; border-radius:5%;')
 					center
 						h1(style='color:white')= groupName
 						- var list = emailList
-						.box(style='padding-top:1%; overflow-y: scroll; height:200px; float:left; background-color:white; border:2px; border-style:solid; border-color:white; border-radius:5%')
+						.box(style='padding-top:1%; overflow-y: scroll; width:100%;height:200px; float:left; background-color:white; border:2px; border-style:solid; border-color:white; border-radius:5%')
 							ul(style='list-style-type: none;' align='left' )
 								each val in list
 									li= val
+
+		.row(style='padding-top:5%')
+			.col-lg-12
+					form(action=''+nukePath, method = 'post')
+						center
+							h3 Nuke This Group
+							button(style='color:white; background-color:red; border:2px; border-style:solid; border-color:white; border-radius:5%',type='submit', value='Submit') Remove Group Forever
+							br
