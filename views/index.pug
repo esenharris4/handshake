@@ -1,38 +1,39 @@
 extends layout
 
 block content
-      .row-fluid(style='padding:1%;background:#E57480')
-        h1(align="center" style='color: #fffff5') Square Mail
+      .row-fluid(style='padding:1%;background:#353DA5')
+        h1(align="center" style='color: #fffff5;padding:3%;font-size:36pt') Square Mail
           img(alt='Brand', src='/images/whiteSquarelogo.png', style='height:5%; width:5%')
-      .container
-        .row(style='padding:2%')
-        form(action='/' method = 'post')
+      .container-fluid(style='padding:7%; background-color:#353DA5')
+        .row
               .row.col-lg-12
-                  .col-1
-                  .col-lg-3(style='padding:3%; border:3px; border-style:solid; border-color:#7BD4F3; border-radius:5%;')
-                      center
-                        h2(style='color: black') Login
+                  .col-lg-1
+                  .col-lg-3(style='padding:5%; border:3px; border-style: solid; border-color:white; font-size: 16pt; border-radius:5%;')
+                      p( style='color: white;') Enter login info or create an account to connect instantly to millions!
+                  .col-lg-1
+                  .col-lg-3(style='padding:3%; border:3px; border-style: solid; border-color:white; background-color:white; border-radius:5%;')
+                    form(action='/' method = 'post')
+                        center
+                          h2(style='color: #353DA5') User Login
+                          br
+                          input(align='center',style='border: white', type='text', name='email', placeholder='Enter Email')
+                          br
+                          input(style='border: white', type='password', name='password', placeholder='Enter Password')
+                          br
+                          br
+                          button(style='color:white;border-radius:5%; border: white; width: 150px; padding: 5%; background-color: #353DA5', type='submit', value='Submit') Submit
                         br
-                        input(align='center',style='border: white', type='text', name='email', placeholder='Enter Email')
-                        br
-                        input(style='border: white', type='password', name='password', placeholder='Enter Password')
-                        br
-                        br
-                        button(style='color:white;border-radius:5%; border: white; background-color: #7BD4F3', type='submit', value='Submit') Submit
-                        br
-                  .col-lg-5
-                  .col-3(style='padding:5%; border:3px; border-style:solid; border-color:#E8E288; border-radius:5%;background:#E8E288')
-                      p( style='color:white;') Enter login info or create an account to connect instantly to millions!
-        form(action='/createUser' method = 'post')
-              .row.col-lg-12
-                  .col-lg-5
-                  .col-lg-3(style='padding:3%; border:3px; border-style:solid; border-color:#7DCE82; border-radius:5%')
-                    center
-                      h2 Create Account
-                      br
-                      input(style='border: white', type='text', name='email', placeholder='Enter New Email')
-                      br
-                      input(style='border: white', type='password', name='password', placeholder='Enter New Password')
-                      br
-                      br
-                      button(style='color:white;border-radius:5%; background:#7DCE82; border: white', type='submit', value='Submit') Submit
+                  .col-lg-1
+                  .col-lg-3(style='padding:3%; border:3px; border-style:solid; border-color:white; border-radius:5%')
+                    form(action='/createUser' method = 'post')
+                        center
+                          h2(style='color: white') Create Account
+                          br
+                          input(style='border: white', type='text', name='email', placeholder='Enter New Email')
+                          br
+                          input(style='border: white', type='password', name='password', placeholder='Enter New Password')
+                          br
+                          br
+                          button(style='color:#353DA5;border-radius:5%; background:white; width: 150px; padding: 5%; border: white', type='submit', value='Submit') Submit
+      .row
+          p(style='position: absolute; bottom:0; padding-left:3%; color:grey' ) EC 441 - authors: Esen Harris, Josh Stern , Josh Surette

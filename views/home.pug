@@ -1,6 +1,6 @@
 extends layout
 block content
-	.row(style='padding:1%; position: fixed; background:#E57480;z-index: 1;')
+	.row(style='padding:1%; position: fixed; background:#353DA5;z-index: 1;')
 		.col-lg-3
 		.col-lg-6
 			h1(align='center',style="color:white") Square Mail Dashboard
@@ -9,8 +9,8 @@ block content
 		.col-lg-3
 					h6
 						a(style='color:white; float:right' ,href='/logout') Logout
-	.container-fluid(style='padding:0%; background-color:grey')
-			.row(style='padding:4%')
+	.container-fluid(style='padding:0%; background-color:#353DA5')
+			.row-fluid(style='padding:4%')
 			.row(style='padding:5%')
 				.col-lg-2
 				.col-lg-3(style='padding:4%; border:3px; border-style:solid; border-color:white; border-radius:5%; background-color:white')
@@ -21,10 +21,9 @@ block content
 								input(style='padding:2%; border:white', type='text', name='newGroup', placeholder='New Group Name')
 								br
 								br
-								button(style='color:white;border:5px; border-style:solid; border-color:#E57480; border-radius:5%; background-color:#E57480;',type='submit', value='Submit') SquareMyGroup
+								button(style='color:white;border:5px; border-style:solid; border-color:#353DA5; border-radius:5%; background-color:#353DA5;',type='submit', value='Submit') SquareMyGroup
 								br
 				.col-lg-2
-
 				.col-lg-3(style='padding:4%; border:3px; border-style:solid; border-color: white; border-radius:5%; background-color:white')
 					form(action='/home/sendMail' method = 'post')
 						center
@@ -36,7 +35,7 @@ block content
 							input(style='padding:2%;border: white',type='text', name='message', placeholder='Enter Message')
 							br
 							br
-							button(style='color:white;border:5px; border-style:solid; border-color:#E57480; border-radius:5%; background-color:#E57480;',type='submit', value='Mail') Submit
+							button(style='color:white;border:5px; border-style:solid; border-color:#353DA5; border-radius:5%; background-color:#353DA5;',type='submit', value='Mail') Submit
 							br
 	.container
 				.row(style='padding:2%')
