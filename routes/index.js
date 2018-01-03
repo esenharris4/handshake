@@ -85,9 +85,9 @@ router.post('/home/sendMail', function(req, res, next) {
 
 	const mailOptions = {
 		from: req.user._id,
-		to: emailList,
+		bcc: emailList,
 		subject: req.user.groups[emailListIndex] + ' Group: ' + req.body.subject,
-		text: req.body.message + "\n\nSent via SquareMail"
+		text: req.body.message + "\n\nSent by " + req.user._id + " via SquareMail"
 	};
 
 	transporter.sendMail(mailOptions, function (err, info) {
