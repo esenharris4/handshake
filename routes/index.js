@@ -83,6 +83,7 @@ router.post('/home/sendMail', function(req, res, next) {
 	var emailListIndex = req.user.groups.indexOf(req.body.targetGroup)
 	var emailList = req.user.emailList[emailListIndex]
 
+	// BCC's users automatically
 	const mailOptions = {
 		from: req.user._id,
 		bcc: emailList,
