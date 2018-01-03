@@ -114,30 +114,51 @@ router.get('/groupInfo/:val', function (req, res, next) {
 })
 
 router.post('/add/:val', function(req, res, next) {
+
+	// Locate the user in the database by their primary key (ie: email)
 	req.app.db.models.User.findById(req.user._id, function (err, user) {
+
 	  if (err){
-	  	return handleError(err);
+	  	return handleError(err)
 	  }
 
 	  var emailListIndex = req.user.groups.indexOf(req.params.val)
-	  if(req.body.newEmail == ""){
-	  	console.log('empty string')
-		res.render('groupInfo', {groupName: req.params.val, emailList: req.user.emailList[emailListIndex], userName: req.user._id})
-		return
-	  }
-	  var emailList = req.user.emailList[emailListIndex].push(req.body.newEmail)
 
+	  // Error check email to be sure a valid email has been entered
+	  var emailEnding = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+
+	  // If no error was found, push the email, or list of emails, into the database of the corresponding group
+	  var newEmailArray = req.body.newEmail.split(",")
+	  console.log(newEmailArray +"\n")
+
+	  for(var i = 0; i < newEmailArray.length; i++) {
+
+	  	if(emailEnding.test(newEmailArray[i].trim())) {
+	  	
+	  		console.log(newEmailArray[i]) //DELETE
+		  	// Add the email into the database
+		  	var emailList = req.user.emailList[emailListIndex].push(newEmailArray[i].trim())
+		
+		}
+
+	  }
+
+	  // Append new email list to the callback object in Mongo
 	  user.set({ emailList: req.user.emailList })
+
 	  user.save(function (err, updatedUser) {
 	    if (err) return handleError(err);
 	  })
+
 	  if(req.user.emailList.length == 0){
-	  	res.render('groupInfo', {groupName: req.params.val, emailList: ['Your group looks empty!'], userName: req.user._id})
+	  	res.render('groupInfo', {groupName: req.params.val, emailList: [], userName: req.user._id})
 	  }
 	  else {
 	  	res.render('groupInfo', {groupName: req.params.val, emailList: req.user.emailList[emailListIndex], userName: req.user._id})
 	  }
+
 	});
+
 })
 
 router.post('/delete/:val', function(req, res, next) {
